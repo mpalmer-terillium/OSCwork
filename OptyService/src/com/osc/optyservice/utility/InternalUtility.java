@@ -24,6 +24,7 @@ public class InternalUtility {
             internalVO.setOptyName(oscIntReq.getOptyName());
             internalVO.setUsername(oscIntReq.getUsername());
             internalVO.setPassword(oscIntReq.getPassword());
+            internalVO.setDescription(oscIntReq.getDescription());
         }
         return internalVO;
     }

@@ -7,6 +7,7 @@ public class OSCIntegrationRequest {
     private String optyId;
     private String optyName;
     private String transactionType;
+    private String description;
 
 
     public void setUsername(String username) {
@@ -47,5 +48,13 @@ public class OSCIntegrationRequest {
 
     public String getTransactionType() {
         return transactionType;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

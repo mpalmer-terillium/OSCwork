@@ -17,4 +17,6 @@ public final class OptyServiceConstants {
     
     public static final String QNAME_UPDATE              = "updateOpportunity";
     public static final String LOGGER_NAME               = "CRM";
+    
+    public static final String OPTY_ID_INIT              = "ID NOT FOUND";
 }

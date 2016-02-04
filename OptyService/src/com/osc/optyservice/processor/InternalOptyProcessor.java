@@ -82,6 +82,9 @@ public class InternalOptyProcessor {
     public OSCIntegrationResponse internalProcessReadTransaction(InternalOSCOptyValueObject internalVO) {
         
         OSCIntegrationResponse response = new OSCIntegrationResponse();
+        if(internalVO.getOptyId() != null) {
+            internalVO.setOptyId(OPTY_ID_INIT);
+        }
         
         FindCriteria fc = new FindCriteria();
         fc.setFetchStart(0);
