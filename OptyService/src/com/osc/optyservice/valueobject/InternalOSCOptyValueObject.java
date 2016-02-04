@@ -1,5 +1,7 @@
 package com.osc.optyservice.valueobject;
 
+import javax.xml.datatype.XMLGregorianCalendar;
+
 public class InternalOSCOptyValueObject {
     
     private boolean error;
@@ -8,11 +10,12 @@ public class InternalOSCOptyValueObject {
     private String optyId;
     private String optyName;
     private String transactionType;
+    private String description;
+    private XMLGregorianCalendar lastUpdateTimestamp;
     
     public InternalOSCOptyValueObject() {
         this.error = false;
     }
-
 
     public void setError(boolean error) {
         this.error = error;
@@ -60,5 +63,21 @@ public class InternalOSCOptyValueObject {
 
     public String getTransactionType() {
         return transactionType;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setLastUpdateTimestamp(XMLGregorianCalendar lastUpdateTimestamp) {
+        this.lastUpdateTimestamp = lastUpdateTimestamp;
+    }
+
+    public XMLGregorianCalendar getLastUpdateTimestamp() {
+        return lastUpdateTimestamp;
     }
 }

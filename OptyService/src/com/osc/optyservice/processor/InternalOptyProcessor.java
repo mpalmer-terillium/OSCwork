@@ -10,6 +10,10 @@ import com.oracle.xmlns.apps.sales.opptymgmt.opportunities.opportunityservice.Op
 import com.oracle.xmlns.apps.sales.opptymgmt.opportunities.opportunityservice.OpportunityService;
 import com.oracle.xmlns.apps.sales.opptymgmt.opportunities.opportunityservice.OpportunityService_Service;
 
+import com.oracle.xmlns.apps.sales.opptymgmt.opportunities.opportunityservice.types.DeleteOpportunity;
+import com.oracle.xmlns.apps.sales.opptymgmt.opportunities.opportunityservice.types.DeleteOpportunityResponse;
+import com.oracle.xmlns.apps.sales.opptymgmt.opportunities.opportunityservice.types.UpdateOpportunity;
+
 import com.osc.optyservice.dto.OSCIntegrationResponse;
 import static com.osc.optyservice.constants.OptyServiceConstants.*;
 import com.osc.optyservice.valueobject.InternalOSCOptyValueObject;
@@ -18,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
 import javax.xml.ws.BindingProvider;
 
 import weblogic.wsee.jws.jaxws.owsm.SecurityPoliciesFeature;
@@ -26,34 +32,51 @@ public class InternalOptyProcessor {
     
     protected static OpportunityService_Service opportunityService_Service;
     protected OpportunityService opportunityService;
-    private Logger logger = Logger.getLogger("CRM");
+    private Logger logger = Logger.getLogger(LOGGER_NAME);
+    
     
     public InternalOptyProcessor(InternalOSCOptyValueObject internalVO) {
         super();
         init(internalVO.getUsername(), internalVO.getPassword());
     }
     
+    
     protected void init(String username, String password) {
+        
         System.setProperty(TRANSFORMER_PROPERTY, TRANSFORMER_IMPL_PROPERTY);
         
         opportunityService_Service = new OpportunityService_Service();
         
         //Configure security feature
-        SecurityPoliciesFeature securityFeatures = 
-            new SecurityPoliciesFeature(new String[] { SECURITY_POLICIES_FEATURE });
+        SecurityPoliciesFeature securityFeatures = new SecurityPoliciesFeature(new String[] { SECURITY_POLICIES_FEATURE });
         
         opportunityService = opportunityService_Service.getOpportunityServiceSoapHttpPort(securityFeatures);
         
-        Map<String,Object> reqContext = ((BindingProvider)opportunityService).getRequestContext();
+        Map<String,Object> reqContext = ((BindingProvider) opportunityService).getRequestContext();
         
         reqContext.put(BindingProvider.USERNAME_PROPERTY, username);
         reqContext.put(BindingProvider.PASSWORD_PROPERTY, password);
     }
     
     
-    
     public OSCIntegrationResponse internalProcessCreateTransaction(InternalOSCOptyValueObject internalVO) {
-        return null;
+        
+        OSCIntegrationResponse response = new OSCIntegrationResponse();
+        
+        try {
+            Opportunity opportunity = new Opportunity();
+            
+            opportunity.setName(internalVO.getOptyName());
+            
+            Opportunity optyResp = opportunityService.createOpportunity(opportunity);
+            
+            internalVO.setOptyId(optyResp.getOptyId().toString());
+            
+        } catch (Exception e) {
+            logger.severe("Exception in CREATE: " + e.toString());
+        }
+        response.setResponse("CREATED OPPORTUNITY ID: " + internalVO.getOptyId());
+        return response;
     }
 
     public OSCIntegrationResponse internalProcessReadTransaction(InternalOSCOptyValueObject internalVO) {
@@ -94,17 +117,62 @@ public class InternalOptyProcessor {
         } catch (Exception e) {
             logger.severe("Exception in FIND: " + e.toString());
         }
-        
         response.setResponse("RETURNED OPPORTUTNITY ID: " + internalVO.getOptyId());
-        
         return response;
     }
 
     public OSCIntegrationResponse internalProcessUpdateTransaction(InternalOSCOptyValueObject internalVO) {
-        return null;
+        
+        OSCIntegrationResponse response = new OSCIntegrationResponse();
+        
+        try {
+            
+            UpdateOpportunity updateOpportunity = new UpdateOpportunity();
+            Opportunity opportunityToUpdate = new Opportunity();
+            
+            if(internalVO.getOptyId() != null) {
+                
+                opportunityToUpdate.setOptyId(Long.parseLong(internalVO.getOptyId()));
+                
+                QName qname = new QName(QNAME_UPDATE);
+                JAXBElement<String> description = new JAXBElement(qname, 
+                                                                  String.class, 
+                                                                  String.class, 
+                                                                  (Object)internalVO.getDescription());
+                opportunityToUpdate.setDescription(description);
+                
+                updateOpportunity.setOpportunity(opportunityToUpdate);
+                
+                Opportunity optyResp = opportunityService.updateOpportunity(opportunityToUpdate);
+                
+                internalVO.setLastUpdateTimestamp(optyResp.getLastUpdateDate());
+            }
+        } catch (Exception e) {
+            logger.severe("Exception in UPDATE: " + e.toString());
+        }
+        response.setResponse("UPDATE TIMESTAMP: " + internalVO.getLastUpdateTimestamp());
+        return response;
     }
 
     public OSCIntegrationResponse internalProcessDeleteTransaction(InternalOSCOptyValueObject internalVO) {
+        
+        OSCIntegrationResponse response = new OSCIntegrationResponse();
+        
+        try {
+            DeleteOpportunity deleteOpportunity = new DeleteOpportunity();
+            Opportunity opportunityToDelete = new Opportunity();
+            
+            opportunityToDelete.setOptyId(Long.parseLong(internalVO.getOptyId()));
+            
+            deleteOpportunity.setOpportunity(opportunityToDelete);
+            
+            opportunityService.deleteOpportunity(opportunityToDelete);
+            
+        } catch (Exception e) {
+            logger.severe("Exception in DELETE: " + e.toString());
+        }
+        response.setResponse("DELETED OPPORTUNITY ID: " + internalVO.getOptyId());
+        
         return null;
     }
 }

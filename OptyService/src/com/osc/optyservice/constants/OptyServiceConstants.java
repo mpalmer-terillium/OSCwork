@@ -14,4 +14,7 @@ public final class OptyServiceConstants {
     public static final String TRANSFORMER_PROPERTY      = "javax.xml.transform.TransformerFactory";
     public static final String TRANSFORMER_IMPL_PROPERTY = "com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl";
     public static final String SECURITY_POLICIES_FEATURE = "oracle/wss_username_token_over_ssl_client_policy";
+    
+    public static final String QNAME_UPDATE              = "updateOpportunity";
+    public static final String LOGGER_NAME               = "CRM";
 }
