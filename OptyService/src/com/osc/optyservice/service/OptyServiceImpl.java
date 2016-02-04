@@ -7,9 +7,15 @@ import com.osc.optyservice.utility.InternalUtility;
 import com.osc.optyservice.valueobject.InternalOSCOptyValueObject;
 import static com.osc.optyservice.constants.OptyServiceConstants.*;
 
+import javax.ejb.Stateless;
+
+import javax.jws.WebService;
+
+
+@WebService(endpointInterface="com.osc.optyservice.service.OptyService")
 public class OptyServiceImpl implements OptyService {
     
-    private static InternalOptyProcessor optyProcessor = new InternalOptyProcessor();
+    private static InternalOptyProcessor optyProcessor;
     
     @Override
     public OSCIntegrationResponse processOSCIntegrationRequest(OSCIntegrationRequest oscIntReq) {
@@ -18,7 +24,9 @@ public class OptyServiceImpl implements OptyService {
         
         InternalOSCOptyValueObject internalVO = InternalUtility.validateRequest(oscIntReq);
         
-        if(internalVO.hasError() != false) {
+        optyProcessor = new InternalOptyProcessor(internalVO);
+        
+        if(internalVO.hasError() == false) {
             
             switch (internalVO.getTransactionType()) {
             

@@ -10,7 +10,7 @@ public class InternalUtility {
         
         InternalOSCOptyValueObject internalVO = new InternalOSCOptyValueObject();
         
-        if(oscIntReq.getUsername() == null || oscIntReq.getPassword() == null || oscIntReq.getTransactionType() != null) {
+        if(oscIntReq.getUsername() == null || oscIntReq.getPassword() == null || oscIntReq.getTransactionType() == null) {
             
             internalVO.setError(true);
             
