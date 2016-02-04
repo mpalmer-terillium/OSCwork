@@ -11,7 +11,7 @@ import javax.ejb.Stateless;
 
 import javax.jws.WebService;
 
-
+@Stateless
 @WebService(endpointInterface="com.osc.optyservice.service.OptyService")
 public class OptyServiceImpl implements OptyService {
     
