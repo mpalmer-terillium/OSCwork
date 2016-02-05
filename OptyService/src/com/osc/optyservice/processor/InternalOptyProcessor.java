@@ -11,7 +11,6 @@ import com.oracle.xmlns.apps.sales.opptymgmt.opportunities.opportunityservice.Op
 import com.oracle.xmlns.apps.sales.opptymgmt.opportunities.opportunityservice.OpportunityService_Service;
 
 import com.oracle.xmlns.apps.sales.opptymgmt.opportunities.opportunityservice.types.DeleteOpportunity;
-import com.oracle.xmlns.apps.sales.opptymgmt.opportunities.opportunityservice.types.DeleteOpportunityResponse;
 import com.oracle.xmlns.apps.sales.opptymgmt.opportunities.opportunityservice.types.UpdateOpportunity;
 
 import com.osc.optyservice.dto.OSCIntegrationResponse;
