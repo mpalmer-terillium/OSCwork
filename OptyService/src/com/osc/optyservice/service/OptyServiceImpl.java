@@ -9,16 +9,22 @@ import static com.osc.optyservice.constants.OptyServiceConstants.*;
 
 import javax.ejb.Stateless;
 
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
 
-@Stateless
-@WebService(endpointInterface="com.osc.optyservice.service.OptyService")
+
+@SOAPBinding(style = SOAPBinding.Style.RPC)
+@WebService
 public class OptyServiceImpl implements OptyService {
     
     private static InternalOptyProcessor optyProcessor;
     
     @Override
-    public OSCIntegrationResponse processOSCIntegrationRequest(OSCIntegrationRequest oscIntReq) {
+    @WebMethod
+    public OSCIntegrationResponse processOSCIntegrationRequest(@WebParam(name = "request")
+                                                               OSCIntegrationRequest oscIntReq) {
         
         OSCIntegrationResponse oscResp = new OSCIntegrationResponse();
         
