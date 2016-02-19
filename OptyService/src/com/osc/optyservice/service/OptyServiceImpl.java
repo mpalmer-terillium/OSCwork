@@ -1,13 +1,16 @@
 package com.osc.optyservice.service;
 
+import static com.osc.optyservice.constants.OptyServiceConstants.ERROR_INVALID_TRANS_TYPE;
+import static com.osc.optyservice.constants.OptyServiceConstants.ERROR_UNKNOWN;
+import static com.osc.optyservice.constants.OptyServiceConstants.TRANS_TYPE_CREATE;
+import static com.osc.optyservice.constants.OptyServiceConstants.TRANS_TYPE_DELETE;
+import static com.osc.optyservice.constants.OptyServiceConstants.TRANS_TYPE_READ;
+import static com.osc.optyservice.constants.OptyServiceConstants.TRANS_TYPE_UPDATE;
 import com.osc.optyservice.dto.OSCIntegrationRequest;
 import com.osc.optyservice.dto.OSCIntegrationResponse;
 import com.osc.optyservice.processor.InternalOptyProcessor;
 import com.osc.optyservice.utility.InternalUtility;
 import com.osc.optyservice.valueobject.InternalOSCOptyValueObject;
-import static com.osc.optyservice.constants.OptyServiceConstants.*;
-
-import javax.ejb.Stateless;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -15,11 +18,9 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 
 
-@SOAPBinding(style = SOAPBinding.Style.RPC)
 @WebService
+@SOAPBinding(style = SOAPBinding.Style.RPC)
 public class OptyServiceImpl implements OptyService {
-    
-    private static InternalOptyProcessor optyProcessor;
     
     @Override
     @WebMethod
@@ -30,9 +31,9 @@ public class OptyServiceImpl implements OptyService {
         
         InternalOSCOptyValueObject internalVO = InternalUtility.validateRequest(oscIntReq);
         
-        optyProcessor = new InternalOptyProcessor(internalVO);
-        
-        if(internalVO.hasError() == false) {
+        if(!internalVO.hasError()) {
+            
+            InternalOptyProcessor optyProcessor = new InternalOptyProcessor(internalVO);
             
             switch (internalVO.getTransactionType()) {
             

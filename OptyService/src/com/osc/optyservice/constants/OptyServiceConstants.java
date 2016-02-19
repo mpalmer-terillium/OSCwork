@@ -7,7 +7,22 @@ public final class OptyServiceConstants {
     public static final String TRANS_TYPE_UPDATE         = "UPDATE";
     public static final String TRANS_TYPE_DELETE         = "DELETE";
     
+    public static final String NAME_ATTRIBUTE            = "Name";
+    public static final String EQUALS_OPERATOR           = "=";
+    
     public static final String ERROR_INVALID_TRANS_TYPE  = "ERROR: Invalid Transaction Type";
+    
+    public static final String EXCEPTION_CREATE          = "Exception in CREATE: ";
+    public static final String CREATED_OPTY_MSG          = "CREATED OPPORTUNITY ID: ";
+    
+    public static final String EXCEPTION_FIND            = "Exception in FIND: ";
+    public static final String FIND_OPTY_MSG             = "RETURNED OPPORTUTNITY ID: ";
+    
+    public static final String EXCEPTION_UPDATE          = "Exception in UPDATE: ";
+    public static final String UPDATE_OPTY_MSG           = "UPDATE TIMESTAMP: ";
+    
+    public static final String EXCEPTION_DELETE          = "Exception in DELETE: ";
+    public static final String DELETE_OPTY_MSG           = "DELETED OPPORTUNITY ID: ";
     
     public static final String ERROR_UNKNOWN             = "ERROR: Unknown";
     

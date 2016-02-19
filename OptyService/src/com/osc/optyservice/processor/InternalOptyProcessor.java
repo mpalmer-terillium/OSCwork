@@ -72,9 +72,9 @@ public class InternalOptyProcessor {
             internalVO.setOptyId(optyResp.getOptyId().toString());
             
         } catch (Exception e) {
-            logger.severe("Exception in CREATE: " + e.toString());
+            logger.severe(EXCEPTION_CREATE + e.toString());
         }
-        response.setResponse("CREATED OPPORTUNITY ID: " + internalVO.getOptyId());
+        response.setResponse(CREATED_OPTY_MSG + internalVO.getOptyId());
         return response;
     }
 
@@ -99,8 +99,8 @@ public class InternalOptyProcessor {
         ViewCriteriaItem vci = new ViewCriteriaItem();
         vci.setConjunction(Conjunction.fromValue("And"));
         vci.setUpperCaseCompare(true);
-        vci.setAttribute("Name");
-        vci.setOperator("=");
+        vci.setAttribute(NAME_ATTRIBUTE);
+        vci.setOperator(EQUALS_OPERATOR);
         vci.getValue().add(internalVO.getOptyName());
         
         vcr.getItem().add(vci);
@@ -117,9 +117,9 @@ public class InternalOptyProcessor {
                 internalVO.setOptyId(results.get(0).getOptyId().toString());
             }
         } catch (Exception e) {
-            logger.severe("Exception in FIND: " + e.toString());
+            logger.severe(EXCEPTION_FIND + e.toString());
         }
-        response.setResponse("RETURNED OPPORTUTNITY ID: " + internalVO.getOptyId());
+        response.setResponse(FIND_OPTY_MSG + internalVO.getOptyId());
         return response;
     }
 
@@ -150,9 +150,9 @@ public class InternalOptyProcessor {
                 internalVO.setLastUpdateTimestamp(optyResp.getLastUpdateDate());
             }
         } catch (Exception e) {
-            logger.severe("Exception in UPDATE: " + e.toString());
+            logger.severe(EXCEPTION_UPDATE + e.toString());
         }
-        response.setResponse("UPDATE TIMESTAMP: " + internalVO.getLastUpdateTimestamp());
+        response.setResponse(UPDATE_OPTY_MSG + internalVO.getLastUpdateTimestamp());
         return response;
     }
 
@@ -171,9 +171,9 @@ public class InternalOptyProcessor {
             opportunityService.deleteOpportunity(opportunityToDelete);
             
         } catch (Exception e) {
-            logger.severe("Exception in DELETE: " + e.toString());
+            logger.severe(EXCEPTION_DELETE + e.toString());
         }
-        response.setResponse("DELETED OPPORTUNITY ID: " + internalVO.getOptyId());
+        response.setResponse(DELETE_OPTY_MSG + internalVO.getOptyId());
         
         return null;
     }

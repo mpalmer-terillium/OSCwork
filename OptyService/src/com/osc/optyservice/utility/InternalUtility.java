@@ -15,16 +15,19 @@ public class InternalUtility {
             internalVO.setError(true);
             
         } else {
-            
-            // how much more checking is needed on requests?
-            // need to null check - the needed info will depend on the transaction type (i.e. FIND won't have a OptyID)
-            
-            internalVO.setTransactionType(oscIntReq.getTransactionType());
-            internalVO.setOptyId(oscIntReq.getOptyId());
-            internalVO.setOptyName(oscIntReq.getOptyName());
             internalVO.setUsername(oscIntReq.getUsername());
             internalVO.setPassword(oscIntReq.getPassword());
-            internalVO.setDescription(oscIntReq.getDescription());
+            internalVO.setTransactionType(oscIntReq.getTransactionType());
+            
+            if(oscIntReq.getOptyId() != null) {
+                internalVO.setOptyId(oscIntReq.getOptyId()); 
+            }
+            if(oscIntReq.getOptyName() != null) {
+                internalVO.setOptyName(oscIntReq.getOptyName());
+            }
+            if(oscIntReq.getDescription() != null) {
+                internalVO.setDescription(oscIntReq.getDescription());
+            }
         }
         return internalVO;
     }
