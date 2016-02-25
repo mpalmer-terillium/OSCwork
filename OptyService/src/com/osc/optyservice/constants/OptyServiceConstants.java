@@ -34,4 +34,7 @@ public final class OptyServiceConstants {
     public static final String LOGGER_NAME               = "CRM";
     
     public static final String OPTY_ID_INIT              = "ID NOT FOUND";
+    
+    public static final String SOFTCODING_URI           = "http://127.0.0.1:7101/MockSoftCodingService/softcoding/credentials/getUnPwdOSC";
+
 }
