@@ -3,4 +3,5 @@
 *.jpr
 *.war
 *.jar
+.data/
 */classes
