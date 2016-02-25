@@ -1,0 +1,8 @@
+*.xml
+OptyService_bkup
+*.jws
+*.jpr
+*.war
+*.jar
+.data
+*/classes
