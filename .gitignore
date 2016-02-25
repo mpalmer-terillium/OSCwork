@@ -1,9 +1,17 @@
 *.xml
+<<<<<<< HEAD
+=======
+OptyService_bkup
+>>>>>>> f404fcd69212a06d561b86931a970826913f69d1
 *.jws
 *.jpr
 *.war
 *.jar
+<<<<<<< HEAD
 
 .data
 
+=======
+.data
+>>>>>>> f404fcd69212a06d561b86931a970826913f69d1
 */classes
