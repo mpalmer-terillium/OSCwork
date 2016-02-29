@@ -16,7 +16,7 @@ public final class OptyServiceConstants {
     public static final String CREATED_OPTY_MSG          = "CREATED OPPORTUNITY ID: ";
     
     public static final String EXCEPTION_FIND            = "Exception in FIND: ";
-    public static final String FIND_OPTY_MSG             = "RETURNED OPPORTUTNITY ID: ";
+    public static final String FIND_OPTY_MSG             = "RETURNED OPPORTUNITY ID: ";
     
     public static final String EXCEPTION_UPDATE          = "Exception in UPDATE: ";
     public static final String UPDATE_OPTY_MSG           = "UPDATE TIMESTAMP: ";
